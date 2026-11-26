@@ -119,6 +119,8 @@ h1, h2, h3, p { margin-top: 0; }
 .method-card:hover .card-arrow { color: var(--cyan); transform: translate(2px, -2px); }
 .analysis-trigger { cursor: pointer; text-align: left; }
 .analysis-trigger:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.analysis-trigger.accent-green:focus-visible { outline-color: var(--green); }
+.analysis-trigger.accent-green:hover .card-arrow { color: var(--green); }
 .analysis-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(5, 7, 12, .76); backdrop-filter: blur(10px); animation: analysis-fade-in .18s ease-out; }
 .analysis-dialog { position: relative; width: min(860px, 100%); max-height: min(840px, calc(100dvh - 48px)); overflow: auto; padding: 68px 30px 30px; border: 1px solid rgba(232, 179, 255, .24); border-radius: 12px; background: linear-gradient(145deg, #1c2029, #11151e 78%); box-shadow: 0 24px 80px rgba(0, 0, 0, .64), 0 0 30px -8px rgba(184, 41, 255, .18); animation: analysis-dialog-in .2s ease-out; }
 .analysis-close { position: absolute; top: 17px; right: 18px; min-height: 38px; display: inline-flex; align-items: center; gap: 8px; padding: 0 11px; border: 1px solid rgba(211, 192, 215, .18); border-radius: 6px; color: var(--ink); background: rgba(10, 14, 23, .62); font-size: 10px; cursor: pointer; transition: border-color .16s ease, color .16s ease, background .16s ease; }
@@ -158,6 +160,15 @@ h1, h2, h3, p { margin-top: 0; }
 .method-dialog.accent-violet .analysis-step-button.is-active .analysis-step-index,
 .method-dialog.accent-violet .analysis-step-button.is-active > .icon { color: var(--violet); }
 .method-dialog.accent-violet button:focus-visible { outline-color: var(--violet); }
+.method-dialog.accent-green { border-color: rgba(131, 217, 156, .3); box-shadow: 0 24px 80px rgba(0, 0, 0, .64), 0 0 30px -8px rgba(131, 217, 156, .16); }
+.method-dialog.accent-green .analysis-close:hover { border-color: rgba(131, 217, 156, .4); color: var(--green); background: rgba(131, 217, 156, .08); }
+.method-dialog.accent-green .analysis-dialog-heading .eyebrow,
+.method-dialog.accent-green .analysis-detail-heading { color: var(--green); }
+.method-dialog.accent-green .analysis-step-button:hover { border-color: rgba(131, 217, 156, .22); background: rgba(131, 217, 156, .05); }
+.method-dialog.accent-green .analysis-step-button.is-active { border-color: rgba(131, 217, 156, .34); background: rgba(131, 217, 156, .1); }
+.method-dialog.accent-green .analysis-step-button.is-active .analysis-step-index,
+.method-dialog.accent-green .analysis-step-button.is-active > .icon { color: var(--green); }
+.method-dialog.accent-green button:focus-visible { outline-color: var(--green); }
 @keyframes analysis-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes analysis-dialog-in { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .profile-section { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(50px, 8vw, 110px); }

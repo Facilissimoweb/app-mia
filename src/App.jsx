@@ -155,7 +155,41 @@ const designSteps = [
   },
 ]
 
-function MethodCard({ step, onOpen }) {
+const careIntro =
+  'Mettere online un sito o una web app è solo l\'inizio. Senza manutenzione tecnica e aggiornamenti mirati, anche il progetto più curato invecchia o rallenta. Con il mio approccio in codice proprietario e gestione diretta, il tuo spazio digitale resta veloce, protetto e allineato all\'evoluzione della tua attività, senza che tu debba pensare agli aspetti tecnici.'
+
+const careSteps = [
+  {
+    title: 'Monitoraggio, sicurezza e continuità',
+    detail:
+      'Controllo costante dell\'infrastruttura cloud, certificati SSL attivi, backup versionati del codice su GitHub e protezione da vulnerabilità, senza dover gestire decine di plugin esterni.',
+    output: 'Sito sempre online, protetto e con codice al sicuro.',
+    icon: 'verified_user',
+  },
+  {
+    title: 'Aggiornamenti contenuti e rifiniture',
+    detail:
+      'Hai un nuovo servizio da lanciare, prezzi da aggiornare o testi da rivedere? Me ne occupo direttamente io in tempi rapidi, mantenendo intatta l\'armonia grafica e la pulizia del design system.',
+    output: 'Contenuti sempre freschi e coerenti con l\'identità visiva.',
+    icon: 'edit_note',
+  },
+  {
+    title: 'Ottimizzazione performance e SEO tecnica',
+    detail:
+      'Verifico periodicamente tempi di caricamento, resa su dispositivi mobili e struttura semantica per garantire un\'esperienza fluida a chi visita il sito e una buona indicizzazione.',
+    output: 'Velocità costante e base tecnica solida per i motori di ricerca.',
+    icon: 'speed',
+  },
+  {
+    title: 'Supporto evolutivo e nuove funzioni',
+    detail:
+      'Quando la tua attività cresce, il progetto cresce con te: possiamo aggiungere nuove sezioni, moduli di prenotazione, aree riservate o integrazioni AI mirate senza dover ricostruire il sito da zero.',
+    output: 'Un ecosistema digitale scalabile e pronto per i prossimi passi.',
+    icon: 'trending_up',
+  },
+]
+
+function MethodCard({ step, onOpen, isOpen }) {
   function open(event) {
     onOpen(step, event.currentTarget)
   }
@@ -163,6 +197,7 @@ function MethodCard({ step, onOpen }) {
   return (
     <article
       aria-haspopup="dialog"
+      aria-expanded={isOpen}
       className={`method-card accent-${step.accent} analysis-trigger`}
       onClick={open}
       onKeyDown={(event) => {
@@ -186,7 +221,8 @@ function MethodDialog({ step, onClose }) {
   const [activeStep, setActiveStep] = useState(0)
   const closeRef = useRef(null)
   const isAnalysis = step.number === '01'
-  const detailSteps = isAnalysis ? analysisSteps : designSteps
+  const isDesign = step.number === '02'
+  const detailSteps = isAnalysis ? analysisSteps : isDesign ? designSteps : careSteps
   const selected = detailSteps[activeStep]
 
   useEffect(() => {
@@ -253,7 +289,7 @@ function MethodDialog({ step, onClose }) {
           <p className="analysis-intro">
             {isAnalysis
               ? 'Prima di aprire il canvas o scrivere codice, facciamo ordine su ciò che conta davvero. Molti siti non convertono o appesantiscono la gestione quotidiana perché nascono senza una direzione precisa: partiamo invece da un confronto pratico per definire cosa deve fare il progetto, a chi parla e quale azione deve generare.'
-              : designIntro}
+              : isDesign ? designIntro : careIntro}
           </p>
         </div>
         <div className="analysis-explorer">
@@ -405,15 +441,13 @@ function App() {
               description="Un percorso chiaro, costruito insieme. Ogni fase ha uno scopo: dare valore alla tua attività, online e nel tempo."
             />
             <div className="method-grid">
-              {method.map((step) => step.number === '01' || step.number === '02' ? (
-                <MethodCard key={step.number} step={step} onOpen={openMethodDialog} />
-              ) : (
-                <article className={`method-card accent-${step.accent}`} key={step.number}>
-                  <div className="card-topline"><span>{step.number}</span><Icon>{step.icon}</Icon></div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                  <span className="card-arrow" aria-hidden="true"><Icon>arrow_outward</Icon></span>
-                </article>
+              {method.map((step) => (
+                <MethodCard
+                  isOpen={openMethod?.number === step.number}
+                  key={step.number}
+                  onOpen={openMethodDialog}
+                  step={step}
+                />
               ))}
             </div>
             {openMethod && (
