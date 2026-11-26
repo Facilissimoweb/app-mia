@@ -518,8 +518,8 @@ function App() {
           <div className="page-width">
             <SectionHeading
               eyebrow="Servizi & investimenti"
-              title={<>Una formula giusta<br className="desktop-break" /> per il tuo momento.</>}
-              description="Investimenti trasparenti e supporto diretto. Partiamo da un confronto: troviamo insieme la soluzione più adatta."
+              title="Un investimento chiaro, senza vincoli chiusi."
+              description="Investimenti trasparenti, supporto diretto e codice di tua proprietà: puoi scegliere la gestione continua in abbonamento, riscattare il codice in seguito o richiederlo subito per gestirlo in autonomia."
             />
             <div className="pricing-grid">
               {plans.map((plan, index) => (
@@ -546,7 +546,13 @@ function App() {
                 </article>
               ))}
             </div>
-            <p className="pricing-footnote">I prezzi indicati sono orientativi. Il codice è sempre tuo: puoi scegliere la gestione continua oppure acquistare il solo codice in autonomia. Scrivimi per definire insieme il perimetro.</p>
+            <aside className="pricing-info" aria-label="Proprietà e gestione del codice">
+              <span className="pricing-info-icon"><Icon>code</Icon></span>
+              <div>
+                <h3>Nessun vincolo chiuso · Il codice resta tuo</h3>
+                <p>Puoi partire con un piano di gestione continua e riscattare il codice sorgente quando vuoi, oppure richiedere direttamente la consegna del codice una tantum per gestirlo in autonomia. I prezzi indicati sono orientativi: scrivimi per definire insieme il perimetro.</p>
+              </div>
+            </aside>
           </div>
         </section>
 
@@ -565,7 +571,7 @@ function App() {
             <label htmlFor="contact-service">Di cosa hai bisogno?</label>
             <select id="contact-service" name="service" value={service} onChange={(event) => setService(event.target.value)}>
               {plans.map((plan) => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
-              <option value="Acquisto codice sorgente">Acquisto codice sorgente</option>
+              <option value="Acquisto codice sorgente (una tantum)">Acquisto codice sorgente (una tantum)</option>
               <option value="Altro progetto">Altro progetto</option>
             </select>
             <label htmlFor="contact-message">Raccontami il tuo progetto</label>
