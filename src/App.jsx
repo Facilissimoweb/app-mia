@@ -57,7 +57,14 @@ function App() {
           </div>
 
           <div className="hero-art">
-            <img className="hero-logo" src={brandLogo} alt="Logo mtrdesign.me" />
+            <div className="hero-logo-lockup">
+              <img className="hero-logo" src={brandLogo} alt="" />
+              <div className="hero-logo-caption">
+                <strong>mtrdesign.me</strong>
+                <span>STUDIO DI DESIGN</span>
+                <span>di M. Teresa Rogani</span>
+              </div>
+            </div>
           </div>
 
           <div className="hero-stats">

@@ -75,8 +75,13 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-proof > div { display: flex; align-items: center; gap: 8px; font-size: 11px; }
 .hero-proof .icon { color: var(--green); font-size: 17px; }
 .hero-art { position: relative; display: grid; place-items: center; height: 480px; }
-.hero-logo { display: block; width: min(78%, 390px); max-width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 38px rgba(0, 238, 252, .14)); transform-origin: center; animation: hero-logo-spin 28s linear infinite; }
+.hero-logo-lockup { width: min(78%, 390px); }
+.hero-logo { display: block; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 38px rgba(0, 238, 252, .14)); transform-origin: center; animation: hero-logo-spin 28s linear infinite reverse; }
 @keyframes hero-logo-spin { to { transform: rotate(360deg); } }
+.hero-logo-caption { display: grid; gap: 4px; padding-right: 8px; text-align: right; line-height: 1.2; }
+.hero-logo-caption strong { color: var(--ink); font-family: var(--outfit); font-size: 16px; font-weight: 500; letter-spacing: .02em; }
+.hero-logo-caption span { color: var(--muted); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+.hero-logo-caption span:last-child { font-size: 11px; letter-spacing: .02em; text-transform: none; }
 .hero-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .hero-stats div { min-height: 85px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 12px 22px; border-right: 1px solid var(--border); }
 .hero-stats div:first-child { padding-left: 0; }
@@ -421,7 +426,7 @@ h1, h2, h3, p { margin-top: 0; }
   .hero-proof { gap: 15px; margin-top: 26px; }
   .hero-proof > div { font-size: 9px; }
   .hero-art { width: min(100%, 390px); height: 365px; margin: 3px auto 0; transform: none; }
-  .hero-logo { width: min(86vw, 340px); }
+  .hero-logo-lockup { width: min(82vw, 320px); }
   .hero-stats div { min-height: 76px; padding-inline: 12px; }
   .hero-stats strong { font-size: 16px; }
   .hero-stats span { font-size: 8px; line-height: 1.35; }
