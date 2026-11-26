@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
+import EditorialPhoto from './EditorialPhoto.jsx'
 import SectionHeading from './SectionHeading.jsx'
+import methodPhoto from '../assets/editorial-method.jpg'
 import {
   analysisSteps,
   careIntro,
@@ -167,11 +169,18 @@ export default function MethodSection() {
   return (
     <section className="method-section section-pad" id="metodo">
       <div className="page-width">
-        <SectionHeading
-          eyebrow="Il mio metodo"
-          title={<>Progettare con intenzione,<br className="desktop-break" /> seguire con attenzione.</>}
-          description="Un percorso chiaro, costruito insieme. Ogni fase ha uno scopo: dare valore alla tua attività, online e nel tempo."
-        />
+        <div className="method-intro">
+          <SectionHeading
+            eyebrow="Il mio metodo"
+            title={<>Progettare con intenzione,<br className="desktop-break" /> seguire con attenzione.</>}
+            description="Un percorso chiaro, costruito insieme. Ogni fase ha uno scopo: dare valore alla tua attività, online e nel tempo."
+          />
+          <EditorialPhoto
+            alt="Postazione di progettazione digitale con interfacce scure su monitor e tablet e schizzi di layout su un quaderno."
+            className="editorial-image-method"
+            src={methodPhoto}
+          />
+        </div>
         <div className="method-grid">
           {method.map((step) => (
             <MethodCard
