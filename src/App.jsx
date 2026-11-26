@@ -4,6 +4,7 @@ import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
+import StackAiRibbon from './components/StackAiRibbon.jsx'
 import brandLogo from './assets/mtrdesignlogo.png'
 
 const EMAIL = 'studio@teresarogani.design'
@@ -74,6 +75,7 @@ function App() {
           </div>
         </section>
 
+        <StackAiRibbon />
         <MethodSection />
 
         <section className="profile-section section-pad page-width" id="profilo">
