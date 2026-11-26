@@ -149,6 +149,15 @@ h1, h2, h3, p { margin-top: 0; }
 .analysis-deliverable > span { color: var(--green); font-size: 8px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
 .analysis-deliverable strong { display: flex; align-items: flex-start; gap: 7px; color: #d7e7dc; font-size: 10px; font-weight: 500; line-height: 1.5; }
 .analysis-deliverable .icon { flex: 0 0 auto; color: var(--green); font-size: 15px; }
+.analysis-trigger.accent-violet:focus-visible { outline-color: var(--violet); }
+.method-dialog.accent-violet .analysis-close:hover { border-color: rgba(232, 179, 255, .4); color: var(--violet); background: rgba(232, 179, 255, .08); }
+.method-dialog.accent-violet .analysis-dialog-heading .eyebrow,
+.method-dialog.accent-violet .analysis-detail-heading { color: var(--violet); }
+.method-dialog.accent-violet .analysis-step-button:hover { border-color: rgba(232, 179, 255, .22); background: rgba(232, 179, 255, .05); }
+.method-dialog.accent-violet .analysis-step-button.is-active { border-color: rgba(232, 179, 255, .34); background: rgba(232, 179, 255, .11); }
+.method-dialog.accent-violet .analysis-step-button.is-active .analysis-step-index,
+.method-dialog.accent-violet .analysis-step-button.is-active > .icon { color: var(--violet); }
+.method-dialog.accent-violet button:focus-visible { outline-color: var(--violet); }
 @keyframes analysis-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes analysis-dialog-in { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .profile-section { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(50px, 8vw, 110px); }
