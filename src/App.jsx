@@ -4,6 +4,7 @@ import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
+import AmbientMesh3D from './components/AmbientMesh3D.jsx'
 
 const EMAIL = 'studio@teresarogani.design'
 
@@ -56,6 +57,7 @@ function App() {
           </div>
 
           <div className="hero-art" aria-label="Composizione grafica astratta nei colori dello studio">
+            <AmbientMesh3D />
             <div className="art-orbit orbit-one" />
             <div className="art-orbit orbit-two" />
             <div className="art-glow" />
