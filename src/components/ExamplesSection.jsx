@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import SectionHeading from './SectionHeading.jsx'
+import { getWhatsAppHref } from '../data/contact.js'
 import { examples, pizzeriaDemo } from '../data/examples.js'
 
 function formatCurrency(amount) {
@@ -159,7 +160,12 @@ export default function ExamplesSection() {
                       {example.action}<Icon>arrow_forward</Icon>
                     </button>
                   ) : (
-                    <a className="button button-outline example-action" href={example.href}>
+                    <a
+                      className="button button-outline example-action"
+                      href={getWhatsAppHref(example.contactMessage)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
                       {example.action}<Icon>arrow_forward</Icon>
                     </a>
                   )}

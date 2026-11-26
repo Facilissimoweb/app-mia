@@ -1,9 +1,10 @@
 import Icon from './Icon.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import FaqAccordion from './FaqAccordion.jsx'
+import { getWhatsAppHref } from '../data/contact.js'
 import { plans } from '../data/pricing.js'
 
-export default function PricingSection({ onSelectService }) {
+export default function PricingSection() {
   return (
     <section className="services-section section-pad" id="tariffe">
       <div className="page-width">
@@ -29,8 +30,9 @@ export default function PricingSection({ onSelectService }) {
               </ul>
               <a
                 className={`button plan-button ${plan.tone === 'featured' ? 'button-cyan' : 'button-outline'}`}
-                href="#contatto"
-                onClick={() => onSelectService(plan.name)}
+                href={getWhatsAppHref(`Ciao Teresa, vorrei avere informazioni sul servizio ${plan.name}.`)}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 {plan.action}<Icon>arrow_forward</Icon>
               </a>
@@ -41,7 +43,9 @@ export default function PricingSection({ onSelectService }) {
           <span className="pricing-info-icon"><Icon>code</Icon></span>
           <div>
             <h3>Nessun vincolo chiuso · Il codice resta tuo</h3>
-            <p>Puoi partire con un piano di gestione continua e riscattare il codice sorgente quando vuoi, oppure richiedere direttamente la consegna del codice una tantum per gestirlo in autonomia. I prezzi indicati sono orientativi: scrivimi per definire insieme il perimetro.</p>
+            <p>
+              Puoi partire con un piano di gestione continua e riscattare il codice sorgente quando vuoi, oppure richiedere direttamente la consegna del codice una tantum per gestirlo in autonomia. I prezzi indicati sono orientativi: <a href={getWhatsAppHref('Ciao Teresa, vorrei definire il perimetro del mio progetto e capire quale soluzione è più adatta.')} rel="noopener noreferrer" target="_blank">scrivimi su WhatsApp</a> per definire insieme il perimetro.
+            </p>
           </div>
         </aside>
         <FaqAccordion />

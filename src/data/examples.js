@@ -10,7 +10,7 @@ export const examples = [
       'Il mio sito attuale è realizzato in WordPress: un esempio concreto di cura della struttura, della gerarchia dei contenuti e della resa da smartphone. Se hai già una base WordPress, possiamo ragionare su come migliorarla; la piattaforma di partenza non definisce da sola la soluzione giusta per il tuo progetto.',
     features: ['Struttura e gerarchia', 'Cura dei contenuti', 'Resa da smartphone'],
     action: 'Parliamo del tuo sito',
-    href: '#contatto',
+    contactMessage: 'Ciao Teresa, vorrei parlare del mio sito e capire come migliorarlo.',
     icon: 'web',
   },
   {

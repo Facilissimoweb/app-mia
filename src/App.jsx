@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Icon from './components/Icon.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
@@ -6,12 +5,13 @@ import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
 import StackAiRibbon from './components/StackAiRibbon.jsx'
 import brandLogo from './assets/mtrdesignlogo.png'
-
-const EMAIL = 'studio@teresarogani.design'
+import {
+  GENERAL_WHATSAPP_MESSAGE,
+  WHATSAPP_DISPLAY_NUMBER,
+  getWhatsAppHref,
+} from './data/contact.js'
 
 function App() {
-  const [service, setService] = useState('Consulenza strategica')
-
   return (
     <>
       <header className="site-header">
@@ -29,7 +29,12 @@ function App() {
             <a href="#profilo">Profilo</a>
             <a href="#tariffe">Servizi</a>
           </nav>
-          <a className="button button-small button-cyan header-cta" href="#contatto">
+          <a
+            className="button button-small button-cyan header-cta"
+            href={getWhatsAppHref(GENERAL_WHATSAPP_MESSAGE)}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             Parliamone <Icon>north_east</Icon>
           </a>
         </div>
@@ -46,7 +51,12 @@ function App() {
               Un’unica interlocutrice, dall’idea alla cura quotidiana.
             </p>
             <div className="hero-actions">
-              <a className="button button-cyan" href="#contatto">
+              <a
+                className="button button-cyan"
+                href={getWhatsAppHref('Ciao Teresa, vorrei raccontarti il mio progetto e capire come realizzarlo online.')}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 Raccontami il tuo progetto <Icon>arrow_forward</Icon>
               </a>
               <a className="text-link" href="#metodo">Scopri il mio metodo <Icon>south</Icon></a>
@@ -128,14 +138,21 @@ function App() {
                 <p>Assistenti conversazionali e automazioni integrati direttamente nell'interfaccia solo quando semplificano davvero il lavoro quotidiano.</p>
               </article>
             </div>
-            <a className="text-link" href={`mailto:${EMAIL}`}>Scrivimi direttamente <Icon>arrow_forward</Icon></a>
+            <a
+              className="text-link"
+              href={getWhatsAppHref('Ciao Teresa, vorrei parlare del mio progetto digitale.')}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Scrivimi su WhatsApp <Icon>arrow_forward</Icon>
+            </a>
           </div>
         </section>
 
         <ExamplesSection />
-        <PricingSection onSelectService={setService} />
+        <PricingSection />
 
-        <ContactSection email={EMAIL} onServiceChange={setService} service={service} />
+        <ContactSection />
       </main>
 
       <footer className="site-footer">
@@ -148,7 +165,13 @@ function App() {
             <a href="#metodo">Metodo</a>
             <a href="#profilo">Profilo</a>
             <a href="#tariffe">Servizi</a>
-            <a href={`mailto:${EMAIL}`}>Email</a>
+            <a
+              href={getWhatsAppHref(GENERAL_WHATSAPP_MESSAGE)}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              WhatsApp · {WHATSAPP_DISPLAY_NUMBER}
+            </a>
           </div>
           <div className="footer-meta"><span>© {new Date().getFullYear()} M. Teresa Rogani</span><a href="#inizio">Torna all’inizio ↑</a></div>
         </div>
@@ -158,7 +181,13 @@ function App() {
         <a href="#inizio"><Icon>home</Icon><span>Home</span></a>
         <a href="#metodo"><Icon>architecture</Icon><span>Metodo</span></a>
         <a href="#tariffe"><Icon>grid_view</Icon><span>Servizi</span></a>
-        <a href="#contatto"><Icon>mail</Icon><span>Contatto</span></a>
+        <a
+          href={getWhatsAppHref(GENERAL_WHATSAPP_MESSAGE)}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Icon>chat</Icon><span>WhatsApp</span>
+        </a>
       </nav>
     </>
   )
