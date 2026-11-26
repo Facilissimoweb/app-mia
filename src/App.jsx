@@ -90,6 +90,88 @@ function SectionHeading({ eyebrow, title, description, id }) {
   )
 }
 
+const analysisSteps = [
+  {
+    title: 'Mappatura obiettivi',
+    detail:
+      'Definiamo il ruolo del sito o della web app (presentazione autorevole, generazione contatti, prenotazioni, servizio in abbonamento o gestione interna) e i criteri di successo.',
+    output: 'Scheda obiettivi e azioni prioritarie.',
+    icon: 'flag',
+  },
+  {
+    title: 'Identikit del pubblico',
+    detail:
+      'Chiariamo chi deve capire subito il valore della tua proposta, quali dubbi ha prima di contattarti e quali resistenze vanno smontate.',
+    output: 'Mappa domande/obiezioni del cliente tipo.',
+    icon: 'groups',
+  },
+  {
+    title: 'Gerarchia dei messaggi',
+    detail:
+      'Stabiliamo cosa va detto per primo, quali prove o dettagli aiutano la scelta e cosa tagliare perché distrae o complica.',
+    output: 'Struttura dei contenuti e ordine delle sezioni.',
+    icon: 'format_list_numbered',
+  },
+  {
+    title: 'Perimetro tecnico e contenuti',
+    detail:
+      'Verifichiamo se serve un impianto leggero e veloce in codice o integrazioni mirate, così non compri funzioni inutili né vincoli rigidi.',
+    output: 'Architettura funzionale su misura, senza costi superflui.',
+    icon: 'account_tree',
+  },
+]
+
+function AnalysisCard({ step }) {
+  const [activeStep, setActiveStep] = useState(0)
+  const selected = analysisSteps[activeStep]
+
+  return (
+    <article className={`method-card accent-${step.accent} analysis-card`}>
+      <div className="card-topline">
+        <span>{step.number} ·</span>
+        <Icon>{step.icon}</Icon>
+      </div>
+      <h3 className="analysis-title">Analisi e chiarezza</h3>
+      <p className="analysis-claim">{step.description}</p>
+      <p className="analysis-intro">
+        Prima di aprire il canvas o scrivere codice, facciamo ordine su ciò che conta davvero. Molti siti non convertono o appesantiscono la gestione quotidiana perché nascono senza una direzione precisa: partiamo invece da un confronto pratico per definire cosa deve fare il progetto, a chi parla e quale azione deve generare.
+      </p>
+      <div className="analysis-explorer">
+        <div className="analysis-step-list">
+          <span className="analysis-label">Cosa facciamo insieme</span>
+          <div className="analysis-step-options" role="group" aria-label="Passaggi dell'analisi">
+            {analysisSteps.map((item, index) => (
+              <button
+                aria-pressed={activeStep === index}
+                className={`analysis-step-button${activeStep === index ? ' is-active' : ''}`}
+                key={item.title}
+                onClick={() => setActiveStep(index)}
+                type="button"
+              >
+                <span className="analysis-step-index">0{index + 1}</span>
+                <span>{item.title}</span>
+                <Icon>chevron_right</Icon>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="analysis-step-detail" aria-live="polite">
+          <div className="analysis-detail-heading">
+            <Icon>{selected.icon}</Icon>
+            <span>Passaggio 0{activeStep + 1}</span>
+          </div>
+          <h4>{selected.title}</h4>
+          <p>{selected.detail}</p>
+          <div className="analysis-deliverable">
+            <span>Output prima del design</span>
+            <strong><Icon>task_alt</Icon>{selected.output}</strong>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+
 function App() {
   const [service, setService] = useState('Consulenza strategica')
   const [notice, setNotice] = useState('')
@@ -190,7 +272,9 @@ function App() {
               description="Un percorso chiaro, costruito insieme. Ogni fase ha uno scopo: dare valore alla tua attività, online e nel tempo."
             />
             <div className="method-grid">
-              {method.map((step) => (
+              {method.map((step) => step.number === '01' ? (
+                <AnalysisCard key={step.number} step={step} />
+              ) : (
                 <article className={`method-card accent-${step.accent}`} key={step.number}>
                   <div className="card-topline"><span>{step.number}</span><Icon>{step.icon}</Icon></div>
                   <h3>{step.title}</h3>
