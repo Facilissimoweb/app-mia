@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const EMAIL = 'studio@teresarogani.design'
 
@@ -123,52 +123,143 @@ const analysisSteps = [
 
 function AnalysisCard({ step }) {
   const [activeStep, setActiveStep] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
+  const triggerRef = useRef(null)
+  const closeRef = useRef(null)
   const selected = analysisSteps[activeStep]
 
+  useEffect(() => {
+    if (!isOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeRef.current?.focus()
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+        triggerRef.current?.focus()
+        return
+      }
+
+      if (event.key === 'Tab') {
+        const focusable = document.querySelectorAll(
+          '.analysis-dialog button:not([disabled]), .analysis-dialog [href], .analysis-dialog input, .analysis-dialog select, .analysis-dialog textarea',
+        )
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last?.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen])
+
+  function closeDialog() {
+    setIsOpen(false)
+    triggerRef.current?.focus()
+  }
+
   return (
-    <article className={`method-card accent-${step.accent} analysis-card`}>
-      <div className="card-topline">
-        <span>{step.number} ·</span>
-        <Icon>{step.icon}</Icon>
-      </div>
-      <h3 className="analysis-title">Analisi e chiarezza</h3>
-      <p className="analysis-claim">{step.description}</p>
-      <p className="analysis-intro">
-        Prima di aprire il canvas o scrivere codice, facciamo ordine su ciò che conta davvero. Molti siti non convertono o appesantiscono la gestione quotidiana perché nascono senza una direzione precisa: partiamo invece da un confronto pratico per definire cosa deve fare il progetto, a chi parla e quale azione deve generare.
-      </p>
-      <div className="analysis-explorer">
-        <div className="analysis-step-list">
-          <span className="analysis-label">Cosa facciamo insieme</span>
-          <div className="analysis-step-options" role="group" aria-label="Passaggi dell'analisi">
-            {analysisSteps.map((item, index) => (
-              <button
-                aria-pressed={activeStep === index}
-                className={`analysis-step-button${activeStep === index ? ' is-active' : ''}`}
-                key={item.title}
-                onClick={() => setActiveStep(index)}
-                type="button"
-              >
-                <span className="analysis-step-index">0{index + 1}</span>
-                <span>{item.title}</span>
-                <Icon>chevron_right</Icon>
-              </button>
-            ))}
-          </div>
+    <>
+      <article
+        aria-expanded={isOpen}
+        aria-haspopup="dialog"
+        className={`method-card accent-${step.accent} analysis-trigger`}
+        onClick={() => setIsOpen(true)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            setIsOpen(true)
+          }
+        }}
+        ref={triggerRef}
+        role="button"
+        tabIndex={0}
+      >
+        <div className="card-topline"><span>{step.number}</span><Icon>{step.icon}</Icon></div>
+        <h3>{step.title}</h3>
+        <p>{step.description}</p>
+        <span className="card-arrow" aria-hidden="true"><Icon>arrow_outward</Icon></span>
+      </article>
+
+      {isOpen && (
+        <div
+          className="analysis-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closeDialog()
+          }}
+        >
+          <section
+            aria-labelledby="analysis-dialog-title"
+            aria-modal="true"
+            className="analysis-dialog"
+            role="dialog"
+          >
+            <button
+              aria-label="Chiudi approfondimento"
+              className="analysis-close"
+              onClick={closeDialog}
+              ref={closeRef}
+              type="button"
+            >
+              <span>Chiudi</span><Icon>close</Icon>
+            </button>
+            <div className="analysis-dialog-heading">
+              <span className="eyebrow"><span className="eyebrow-line" />01 · Il mio metodo</span>
+              <h2 id="analysis-dialog-title">01 · Analisi e chiarezza</h2>
+              <p className="analysis-claim">{step.description}</p>
+              <p className="analysis-intro">
+                Prima di aprire il canvas o scrivere codice, facciamo ordine su ciò che conta davvero. Molti siti non convertono o appesantiscono la gestione quotidiana perché nascono senza una direzione precisa: partiamo invece da un confronto pratico per definire cosa deve fare il progetto, a chi parla e quale azione deve generare.
+              </p>
+            </div>
+            <div className="analysis-explorer">
+              <div className="analysis-step-list">
+                <span className="analysis-label">Cosa facciamo insieme</span>
+                <div className="analysis-step-options" role="group" aria-label="Passaggi dell'analisi">
+                  {analysisSteps.map((item, index) => (
+                    <button
+                      aria-pressed={activeStep === index}
+                      className={`analysis-step-button${activeStep === index ? ' is-active' : ''}`}
+                      key={item.title}
+                      onClick={() => setActiveStep(index)}
+                      type="button"
+                    >
+                      <span className="analysis-step-index">0{index + 1}</span>
+                      <span>{item.title}</span>
+                      <Icon>chevron_right</Icon>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="analysis-step-detail" aria-live="polite">
+                <div className="analysis-detail-heading">
+                  <Icon>{selected.icon}</Icon>
+                  <span>Passaggio 0{activeStep + 1}</span>
+                </div>
+                <h3>{selected.title}</h3>
+                <p>{selected.detail}</p>
+                <div className="analysis-deliverable">
+                  <span>Output prima del design</span>
+                  <strong><Icon>task_alt</Icon>{selected.output}</strong>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <div className="analysis-step-detail" aria-live="polite">
-          <div className="analysis-detail-heading">
-            <Icon>{selected.icon}</Icon>
-            <span>Passaggio 0{activeStep + 1}</span>
-          </div>
-          <h4>{selected.title}</h4>
-          <p>{selected.detail}</p>
-          <div className="analysis-deliverable">
-            <span>Output prima del design</span>
-            <strong><Icon>task_alt</Icon>{selected.output}</strong>
-          </div>
-        </div>
-      </div>
-    </article>
+      )}
+    </>
   )
 }
 
