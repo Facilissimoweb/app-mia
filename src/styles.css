@@ -223,6 +223,21 @@ h1, h2, h3, p { margin-top: 0; }
 .pricing-info-icon .icon { font-size: 21px; }
 .pricing-info h3 { margin: 0 0 5px; color: var(--violet); font-family: var(--outfit); font-size: 14px; font-weight: 500; line-height: 1.4; }
 .pricing-info p { margin: 0; color: #b6bac8; font-size: 11px; line-height: 1.7; }
+.pricing-faq { margin-top: 44px; }
+.pricing-faq-heading { margin-bottom: 14px; }
+.pricing-faq-heading .eyebrow { margin-bottom: 8px; color: var(--violet); }
+.pricing-faq-heading h2 { margin: 0; color: var(--ink); font-family: var(--outfit); font-size: 25px; font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+.pricing-faq-list { border-top: 1px solid rgba(211, 192, 215, .12); }
+.pricing-faq-item { border-bottom: 1px solid rgba(211, 192, 215, .12); }
+.pricing-faq-item h3 { margin: 0; }
+.pricing-faq-toggle { width: 100%; min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 4px; border: 0; color: #d7d9e3; background: transparent; text-align: left; font-size: 12px; font-weight: 500; cursor: pointer; transition: color .18s ease; }
+.pricing-faq-toggle:hover, .pricing-faq-item.is-open .pricing-faq-toggle { color: var(--violet); }
+.pricing-faq-toggle .icon { flex: 0 0 auto; color: var(--violet); font-size: 20px; transition: transform .24s ease; }
+.pricing-faq-item.is-open .pricing-faq-toggle .icon { transform: rotate(180deg); }
+.pricing-faq-answer { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .26s ease, visibility 0s linear .26s; }
+.pricing-faq-item.is-open .pricing-faq-answer { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .26s ease, visibility 0s; }
+.pricing-faq-answer-inner { min-height: 0; overflow: hidden; }
+.pricing-faq-answer p { margin: 0; padding: 0 38px 17px 4px; color: var(--muted); font-size: 11px; line-height: 1.8; }
 .contact-section { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(50px, 9vw, 120px); padding-top: 115px; padding-bottom: 120px; }
 .contact-intro { padding-top: 12px; }
 .contact-intro .eyebrow { color: var(--cyan); }
@@ -338,6 +353,10 @@ h1, h2, h3, p { margin-top: 0; }
   .pricing-info-icon { width: 36px; height: 36px; }
   .pricing-info h3 { font-size: 12px; }
   .pricing-info p { font-size: 10px; line-height: 1.65; }
+  .pricing-faq { margin-top: 34px; }
+  .pricing-faq-heading h2 { font-size: 22px; }
+  .pricing-faq-toggle { min-height: 54px; gap: 12px; padding-block: 12px; font-size: 11px; }
+  .pricing-faq-answer p { padding-right: 28px; font-size: 10px; line-height: 1.75; }
   .contact-section { grid-template-columns: 1fr; gap: 32px; padding-top: 76px; padding-bottom: 75px; }
   .contact-form { padding: 19px; }
   .footer-inner { grid-template-columns: 1fr; gap: 22px; }
