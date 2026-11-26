@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Icon from './components/Icon.jsx'
 import ContactSection from './components/ContactSection.jsx'
+import ExamplesSection from './components/ExamplesSection.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
 
@@ -135,6 +136,7 @@ function App() {
           </div>
         </section>
 
+        <ExamplesSection />
         <PricingSection onSelectService={setService} />
 
         <ContactSection email={EMAIL} onServiceChange={setService} service={service} />
