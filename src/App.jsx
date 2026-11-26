@@ -546,7 +546,7 @@ function App() {
                 </article>
               ))}
             </div>
-            <p className="pricing-footnote">I prezzi indicati sono orientativi. Scrivimi per definire insieme il perimetro del tuo progetto.</p>
+            <p className="pricing-footnote">I prezzi indicati sono orientativi. Il codice è sempre tuo: puoi scegliere la gestione continua oppure acquistare il solo codice in autonomia. Scrivimi per definire insieme il perimetro.</p>
           </div>
         </section>
 
@@ -565,6 +565,7 @@ function App() {
             <label htmlFor="contact-service">Di cosa hai bisogno?</label>
             <select id="contact-service" name="service" value={service} onChange={(event) => setService(event.target.value)}>
               {plans.map((plan) => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
+              <option value="Acquisto codice sorgente">Acquisto codice sorgente</option>
               <option value="Altro progetto">Altro progetto</option>
             </select>
             <label htmlFor="contact-message">Raccontami il tuo progetto</label>
