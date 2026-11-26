@@ -214,17 +214,43 @@ function App() {
           </div>
           <div className="profile-copy">
             <span className="eyebrow"><span className="eyebrow-line" />Piacere, Teresa</span>
-            <h2>Una mente creativa.<br /><span>Una sola interlocutrice.</span></h2>
+            <h2>Una mente creativa.<br /><span>Codice proprietario, zero vincoli.</span></h2>
             <p>
-              Sono M. Teresa Rogani, designer della comunicazione visiva e consulente digitale.
-              Unisco sensibilità visiva e metodo per trasformare idee e obiettivi in esperienze digitali chiare.
+              Sono M. Teresa Rogani, designer della comunicazione visiva e sviluppatrice web freelance. Unisco progettazione grafica e tecnologie moderne per costruire siti e web app veloci, leggeri e facili da mantenere nel tempo. Lavorerai sempre direttamente con me: niente intermediari, niente template preconfezionati e nessuna dipendenza da piattaforme pesanti.
             </p>
-            <p>
-              Lavorerai sempre direttamente con me: ascolto, progetto e mi prendo cura del tuo spazio online,
-              anche dopo la pubblicazione.
-            </p>
-            <div className="skill-list">
-              <span>Art direction</span><span>Design web</span><span>Strategia digitale</span>
+            <div className="profile-stack" aria-label="Stack tecnico e vantaggi">
+              <article className="stack-card">
+                <div className="stack-card-heading">
+                  <Icon>speed</Icon>
+                  <h3>React &amp; Vite</h3>
+                </div>
+                <h4>Velocità istantanea e zero zavorra</h4>
+                <p>Niente temi lenti o decine di plugin da aggiornare ogni settimana. Interfacce reattive e pulite che si caricano in una frazione di secondo, ottimizzate per mobile e motori di ricerca.</p>
+              </article>
+              <article className="stack-card stack-violet">
+                <div className="stack-card-heading">
+                  <Icon>palette</Icon>
+                  <h3>Tailwind CSS &amp; Design System su misura</h3>
+                </div>
+                <h4>Coerenza visiva totale</h4>
+                <p>Ogni colore, font e spaziatura nasce attorno all'identità del progetto. Codice ordinato e modulare, pronto a crescere nel tempo senza rifacimenti.</p>
+              </article>
+              <article className="stack-card stack-green">
+                <div className="stack-card-heading">
+                  <Icon>cloud_done</Icon>
+                  <h3>Infrastruttura Cloud</h3>
+                </div>
+                <h4>Sicurezza e proprietà del codice</h4>
+                <p>GitHub, Vercel e Supabase: codice versionato, protetto e distribuito su reti ad alta affidabilità, già predisposto per aree riservate, database e prenotazioni.</p>
+              </article>
+              <article className="stack-card stack-violet">
+                <div className="stack-card-heading">
+                  <Icon>auto_awesome</Icon>
+                  <h3>Integrazioni AI mirate</h3>
+                </div>
+                <h4>Strumenti utili, non fumo</h4>
+                <p>Assistenti conversazionali e automazioni integrati direttamente nell'interfaccia solo quando semplificano davvero il lavoro quotidiano.</p>
+              </article>
             </div>
             <a className="text-link" href={`mailto:${EMAIL}`}>Scrivimi direttamente <Icon>arrow_forward</Icon></a>
           </div>

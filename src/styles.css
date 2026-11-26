@@ -132,8 +132,17 @@ h1, h2, h3, p { margin-top: 0; }
 .profile-copy h2 { margin-bottom: 20px; font-size: clamp(34px, 4vw, 48px); }
 .profile-copy h2 span, .contact-intro h2 span { color: var(--violet); }
 .profile-copy > p + p { margin-top: 14px; }
-.skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 26px; }
-.skill-list span { padding: 8px 10px; border: 1px solid rgba(200, 97, 255, .25); border-radius: 5px; color: #e2d5ec; background: rgba(200, 97, 255, .08); font-size: 10px; }
+.profile-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin: 24px 0 25px; }
+.stack-card { min-width: 0; padding: 15px; border: 1px solid rgba(0, 238, 252, .16); border-radius: 8px; background: linear-gradient(145deg, rgba(28, 32, 41, .88), rgba(17, 21, 30, .94)); }
+.stack-card-heading { display: flex; align-items: flex-start; gap: 9px; }
+.stack-card-heading > .icon { flex: 0 0 auto; margin-top: 1px; color: var(--cyan); font-size: 17px; }
+.stack-card h3 { margin: 0; color: var(--ink); font-family: var(--outfit); font-size: 13px; font-weight: 500; line-height: 1.4; }
+.stack-card h4 { margin: 9px 0 6px; color: var(--cyan); font-size: 10px; font-weight: 500; line-height: 1.45; }
+.stack-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.65; }
+.stack-violet { border-color: rgba(200, 97, 255, .2); }
+.stack-violet .stack-card-heading > .icon, .stack-violet h4 { color: var(--violet); }
+.stack-green { border-color: rgba(131, 217, 156, .18); }
+.stack-green .stack-card-heading > .icon, .stack-green h4 { color: var(--green); }
 .services-section .section-heading { max-width: 630px; }
 .services-section .eyebrow { color: var(--violet); }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: stretch; }
@@ -247,6 +256,9 @@ h1, h2, h3, p { margin-top: 0; }
   .profile-graphic-letter { font-size: 145px; }
   .profile-graphic-ring { width: 170px; height: 170px; }
   .profile-copy h2 { font-size: 36px; }
+  .profile-stack { grid-template-columns: 1fr; gap: 8px; }
+  .stack-card { padding: 16px; }
+  .stack-card p { font-size: 11px; }
   .pricing-card { min-height: 0; padding: 21px; }
   .plan-note { min-height: auto; }
   .pricing-card ul { margin-bottom: 20px; }
