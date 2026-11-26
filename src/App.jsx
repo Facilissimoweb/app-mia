@@ -19,7 +19,7 @@ function App() {
           <a className="brand" href="#inizio" aria-label="M. Teresa Rogani, torna all'inizio">
             <img className="brand-logo" src={brandLogo} alt="" aria-hidden="true" />
             <span className="brand-copy">
-              <strong>M. Teresa Rogani</strong>
+              <strong>mtrdesign.me</strong>
               <small>Studio di design</small>
             </span>
             <span className="availability-dot" aria-label="Disponibile per nuovi progetti" />
