@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
+import { useCookieConsent } from './CookieConsentManager.jsx'
 import SectionHeading from './SectionHeading.jsx'
 import { getWhatsAppHref } from '../data/contact.js'
 import { examples, pizzeriaDemo } from '../data/examples.js'
@@ -16,6 +17,7 @@ function hideFailedImage(event) {
 }
 
 export default function ExamplesSection() {
+  const { externalMediaAllowed } = useCookieConsent()
   const [isDemoOpen, setIsDemoOpen] = useState(false)
   const [pickupSlot, setPickupSlot] = useState(pizzeriaDemo.initialPickupSlot)
   const [quantities, setQuantities] = useState({ ...pizzeriaDemo.initialQuantities })
@@ -129,13 +131,15 @@ export default function ExamplesSection() {
                   <p className="example-description">{example.description}</p>
                   {isConcept && (
                     <div className="example-preview">
-                      <img
-                        alt={example.preview.imageAlt}
-                        decoding="async"
-                        loading="lazy"
-                        onError={hideFailedImage}
-                        src={example.preview.image}
-                      />
+                      {externalMediaAllowed && (
+                        <img
+                          alt={example.preview.imageAlt}
+                          decoding="async"
+                          loading="lazy"
+                          onError={hideFailedImage}
+                          src={example.preview.image}
+                        />
+                      )}
                       <div className="example-preview-overlay">
                         <div className="example-preview-brand">
                           <span><Icon>local_fire_department</Icon>{example.preview.brand}</span>
@@ -214,13 +218,15 @@ export default function ExamplesSection() {
               <div className="example-demo-phone-column">
                 <div className="example-phone">
                   <div className="example-phone-hero">
-                    <img
-                      alt={pizzeriaDemo.imageAlt}
-                      decoding="async"
-                      loading="lazy"
-                      onError={hideFailedImage}
-                      src={pizzeriaDemo.image}
-                    />
+                    {externalMediaAllowed && (
+                      <img
+                        alt={pizzeriaDemo.imageAlt}
+                        decoding="async"
+                        loading="lazy"
+                        onError={hideFailedImage}
+                        src={pizzeriaDemo.image}
+                      />
+                    )}
                     <div className="example-phone-hero-overlay" />
                     <div className="example-phone-brand">
                       <span><Icon>local_fire_department</Icon>Forno Cortile</span>
@@ -263,13 +269,15 @@ export default function ExamplesSection() {
                       <div className="example-menu">
                         {pizzeriaDemo.menuItems.map((item) => (
                           <article className={`example-menu-item accent-${item.accent}`} key={item.id}>
-                            <img
-                              alt={item.imageAlt}
-                              decoding="async"
-                              loading="lazy"
-                              onError={hideFailedImage}
-                              src={item.image}
-                            />
+                            {externalMediaAllowed && (
+                              <img
+                                alt={item.imageAlt}
+                                decoding="async"
+                                loading="lazy"
+                                onError={hideFailedImage}
+                                src={item.image}
+                              />
+                            )}
                             <div className="example-menu-item-content">
                               <div className="example-menu-item-heading">
                                 <strong>{item.name}</strong>

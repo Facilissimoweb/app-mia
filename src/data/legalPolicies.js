@@ -1,4 +1,6 @@
 // Completa i campi tra parentesi quadre con i dati anagrafici, fiscali e del provider prima della pubblicazione definitiva.
+export const legalBrand = 'mtrdesign.me · M. Teresa Rogani, Web & Graphic Designer freelance'
+
 export const privacyPolicy = {
   title: 'Privacy Policy',
   intro:
@@ -15,7 +17,7 @@ export const privacyPolicy = {
       title: 'Dati trattati e finalità',
       paragraphs: [
         'Se compili il modulo di contatto, il nome, il servizio selezionato e l’eventuale messaggio vengono usati per preparare una richiesta e rispondere a domande o preventivi. Il modulo non invia dati a un server del sito.',
-        'I dati tecnici di navigazione, come indirizzo IP, informazioni sul browser e log di sicurezza, possono essere trattati dal provider che ospita e distribuisce il sito per consentirne il funzionamento e proteggerlo. Provider: [INDICARE HOSTING/CDN].',
+        'La scelta sui cookie e sulle risorse esterne viene salvata nel Local Storage del browser per ricordare le preferenze, senza creare profili. I dati tecnici di navigazione, come indirizzo IP, informazioni sul browser e log di sicurezza, possono essere trattati dal provider che ospita e distribuisce il sito per consentirne il funzionamento e proteggerlo. Provider: [INDICARE HOSTING/CDN].',
         'I concept, gli esempi e i contenuti del portfolio sono pubblicati per presentare i servizi di progettazione e sviluppo. Eventuali dati personali presenti in progetti reali devono essere pubblicati con una base giuridica appropriata.',
       ],
     },
@@ -36,14 +38,14 @@ export const privacyPolicy = {
       title: 'Modalità e destinatari',
       paragraphs: [
         'Il sito non conserva le informazioni inserite nel modulo: nome, servizio ed eventuale messaggio restano nel browser fino all’apertura di WhatsApp e sono inseriti nel collegamento precompilato. Il provider di hosting e i fornitori delle risorse esterne possono ricevere i dati tecnici necessari a fornire i rispettivi servizi.',
-        'Il sito carica font da Google Fonts e alcune immagini da Unsplash. Quando tali risorse vengono richieste, i rispettivi fornitori possono ricevere dati tecnici come l’indirizzo IP e le informazioni del browser. I servizi esterni applicano le proprie informative e potrebbero trattare dati anche fuori dallo Spazio Economico Europeo secondo le garanzie previste dalle loro condizioni.',
+        'Font da Google Fonts e immagini da Unsplash vengono richiesti solo se autorizzi la categoria “Risorse / media esterni”. In quel caso i rispettivi fornitori possono ricevere dati tecnici come l’indirizzo IP e le informazioni del browser. I servizi esterni applicano le proprie informative e potrebbero trattare dati anche fuori dallo Spazio Economico Europeo secondo le garanzie previste dalle loro condizioni.',
       ],
     },
     {
       title: 'Conservazione',
       paragraphs: [
         'Il sito non conserva i dati del modulo. Le comunicazioni ricevute su WhatsApp vengono conservate per il tempo necessario a gestire la richiesta e, se nasce un rapporto professionale, per la sua gestione e per gli obblighi di legge. Criterio o periodo per le richieste che non diventano incarichi: [SPECIFICARE IL PERIODO DI CONSERVAZIONE].',
-        'I log tecnici sono conservati dal provider di hosting secondo i suoi termini e per il periodo applicabile: [INDICARE PROVIDER E TEMPI DI CONSERVAZIONE].',
+        'La preferenza cookie resta nel Local Storage finché non viene modificata o cancellata dal browser. I log tecnici sono conservati dal provider di hosting secondo i suoi termini e per il periodo applicabile: [INDICARE PROVIDER E TEMPI DI CONSERVAZIONE].',
       ],
     },
     {
@@ -74,16 +76,17 @@ export const cookiePolicy = {
       ],
     },
     {
-      title: 'Tecnologie proprie del sito',
+      title: 'Tecnici / necessari',
       paragraphs: [
-        'La versione attuale non imposta né legge cookie propri e non usa Local Storage o Session Storage. Le aperture di FAQ e modali e le selezioni del modulo restano temporanee nella memoria della pagina e non vengono salvate per le visite successive.',
-        'Non sono configurati cookie di profilazione, pubblicità o strumenti di analytics. Se in futuro venissero aggiunti strumenti tecnici strettamente necessari, sarebbero limitati al funzionamento richiesto e questa informativa verrebbe aggiornata.',
+        'La scelta delle preferenze viene salvata nel Local Storage con le sole categorie necessarie (sempre attive) e risorse esterne (facoltative). La memoria serve a ricordare la scelta e non viene usata per profilazione.',
+        'Le selezioni del modulo e le aperture di FAQ e modali restano temporanee nella memoria della pagina. Non sono configurati cookie di profilazione, pubblicità o strumenti di analytics.',
       ],
     },
     {
       title: 'Risorse e servizi esterni',
       paragraphs: [
-        'I font sono richiesti a Google Fonts e alcune immagini dimostrative sono caricate da Unsplash. Il browser contatta questi fornitori per scaricare le risorse e può trasmettere loro dati tecnici, come l’indirizzo IP e le informazioni del browser. Le loro eventuali tecnologie di archiviazione e i relativi trattamenti seguono le informative dei rispettivi fornitori.',
+        'Google Fonts (caratteri e icone) e le immagini dimostrative Unsplash vengono caricati solo se attivi la categoria facoltativa “Risorse / media esterni”. Fino a una scelta affermativa restano bloccati; in caso di rifiuto la pagina usa caratteri e icone locali di fallback e non scarica le immagini esterne.',
+        'Quando autorizzati, il browser contatta questi fornitori per scaricare le risorse e può trasmettere loro dati tecnici, come l’indirizzo IP e le informazioni del browser. Le loro eventuali tecnologie di archiviazione e i relativi trattamenti seguono le informative dei rispettivi fornitori.',
         'I collegamenti a WhatsApp (wa.me) si attivano solo quando li selezioni. Aprendo WhatsApp, il servizio può usare cookie o altre tecnologie secondo le proprie impostazioni e condizioni; il sito non legge né gestisce tali strumenti.',
         'Provider hosting/CDN: [INDICARE IL PROVIDER E VERIFICARE LE SUE TECNOLOGIE DI ARCHIVIAZIONE].',
       ],
@@ -97,8 +100,25 @@ export const cookiePolicy = {
     {
       title: 'Aggiornamenti e contatti',
       paragraphs: [
-        'Questa informativa può essere aggiornata se cambiano le tecnologie o i servizi utilizzati. Per domande sul trattamento dei dati puoi contattare il Titolare su WhatsApp al +39 379 360 3321.',
+        'Puoi cambiare o revocare la scelta in qualsiasi momento dal pulsante “Gestisci cookie” nel footer. Questa informativa può essere aggiornata se cambiano le tecnologie o i servizi utilizzati. Per domande sul trattamento dei dati puoi contattare il Titolare su WhatsApp al +39 379 360 3321.',
       ],
     },
   ],
+}
+
+export function getCookiePolicy(consent) {
+  const currentChoice = consent === null
+    ? 'Non hai ancora salvato una scelta: le risorse esterne restano bloccate fino a quando non le autorizzi.'
+    : consent.externalMedia
+      ? 'La scelta attuale consente le risorse esterne: Google Fonts e le immagini Unsplash vengono caricati.'
+      : 'La scelta attuale rifiuta le risorse esterne: Google Fonts e le immagini Unsplash restano bloccati.'
+
+  return {
+    ...cookiePolicy,
+    sections: cookiePolicy.sections.map((section) => (
+      section.title === 'Risorse e servizi esterni'
+        ? { ...section, paragraphs: [currentChoice, ...section.paragraphs] }
+        : section
+    )),
+  }
 }

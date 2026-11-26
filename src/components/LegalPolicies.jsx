@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
-import { cookiePolicy, privacyPolicy } from '../data/legalPolicies.js'
+import brandLogo from '../assets/mtrdesignlogo.png'
+import { getCookiePolicy, legalBrand, privacyPolicy } from '../data/legalPolicies.js'
+import { useCookieConsent } from './CookieConsentManager.jsx'
 
 function PolicyDialog({ policy, onClose }) {
   const closeButtonRef = useRef(null)
@@ -68,6 +70,10 @@ function PolicyDialog({ policy, onClose }) {
           <span>Chiudi</span><Icon>close</Icon>
         </button>
         <header className="legal-dialog-heading">
+          <div className="legal-brand">
+            <img alt="" src={brandLogo} />
+            <span>{legalBrand}</span>
+          </div>
           <span className="eyebrow"><span className="eyebrow-line" />Informativa</span>
           <h2 id="legal-policy-title">{policy.title}</h2>
           <p id="legal-policy-intro">{policy.intro}</p>
@@ -88,12 +94,13 @@ function PolicyDialog({ policy, onClose }) {
 }
 
 export default function LegalPolicies() {
+  const { consent } = useCookieConsent()
   const [activePolicy, setActivePolicy] = useState(null)
   const triggerRef = useRef(null)
 
-  function openPolicy(policy, event) {
+  function openPolicy(policyName, event) {
     triggerRef.current = event.currentTarget
-    setActivePolicy(policy)
+    setActivePolicy(policyName)
   }
 
   const closePolicy = useCallback(() => {
@@ -101,27 +108,31 @@ export default function LegalPolicies() {
     triggerRef.current?.focus()
   }, [])
 
+  const policy = activePolicy === 'privacy'
+    ? privacyPolicy
+    : activePolicy === 'cookies' ? getCookiePolicy(consent) : null
+
   return (
     <>
       <button
-        aria-expanded={activePolicy === privacyPolicy}
+        aria-expanded={activePolicy === 'privacy'}
         aria-haspopup="dialog"
         className="footer-policy-trigger"
-        onClick={(event) => openPolicy(privacyPolicy, event)}
+        onClick={(event) => openPolicy('privacy', event)}
         type="button"
       >
         Privacy Policy
       </button>
       <button
-        aria-expanded={activePolicy === cookiePolicy}
+        aria-expanded={activePolicy === 'cookies'}
         aria-haspopup="dialog"
         className="footer-policy-trigger"
-        onClick={(event) => openPolicy(cookiePolicy, event)}
+        onClick={(event) => openPolicy('cookies', event)}
         type="button"
       >
         Cookie Policy
       </button>
-      {activePolicy && <PolicyDialog onClose={closePolicy} policy={activePolicy} />}
+      {policy && <PolicyDialog onClose={closePolicy} policy={policy} />}
     </>
   )
 }

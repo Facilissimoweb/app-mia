@@ -1,4 +1,5 @@
 import Icon from './components/Icon.jsx'
+import CookieConsentManager, { useCookieConsent } from './components/CookieConsentManager.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
 import LegalPolicies from './components/LegalPolicies.jsx'
@@ -13,6 +14,16 @@ import {
 } from './data/contact.js'
 
 function App() {
+  return (
+    <CookieConsentManager>
+      <LandingPage />
+    </CookieConsentManager>
+  )
+}
+
+function LandingPage() {
+  const { openCookieSettings } = useCookieConsent()
+
   return (
     <>
       <header className="site-header">
@@ -174,6 +185,9 @@ function App() {
               WhatsApp · {WHATSAPP_DISPLAY_NUMBER}
             </a>
             <LegalPolicies />
+            <button className="footer-policy-trigger" onClick={openCookieSettings} type="button">
+              Gestisci cookie
+            </button>
           </div>
           <div className="footer-meta"><span>© {new Date().getFullYear()} M. Teresa Rogani</span><a href="#inizio">Torna all’inizio ↑</a></div>
         </div>
