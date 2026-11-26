@@ -406,10 +406,23 @@ h1, h2, h3, p { margin-top: 0; }
 .footer-brand .brand-copy strong { font-size: 12px; }
 .footer-brand .brand-copy small { font-size: 9px; }
 .footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 11px; }
+.footer-links a, .footer-policy-trigger { font-size: 11px; }
+.footer-policy-trigger { padding: 0; border: 0; color: var(--muted); background: transparent; cursor: pointer; transition: color .18s ease; }
+.footer-policy-trigger:hover { color: var(--ink); }
 .footer-meta { grid-column: 1 / -1; display: flex; justify-content: space-between; padding-top: 17px; border-top: 1px solid rgba(211, 192, 215, .08); color: #858b9a; font-size: 9px; }
 .footer-meta a:hover { color: var(--cyan); }
 .mobile-nav { display: none; }
+.legal-dialog { width: min(820px, 100%); }
+.legal-dialog-heading { margin-bottom: 20px; padding-right: 75px; }
+.legal-dialog-heading .eyebrow { margin-bottom: 10px; }
+.legal-dialog-heading h2 { margin: 0 0 9px; color: var(--ink); font-family: var(--outfit); font-size: clamp(26px, 4vw, 35px); font-weight: 500; line-height: 1.15; }
+.legal-dialog-heading > p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.legal-policy-content { display: grid; gap: 14px; }
+.legal-policy-section { padding-top: 14px; border-top: 1px solid rgba(211, 192, 215, .1); }
+.legal-policy-section h3 { margin: 0 0 7px; color: var(--cyan); font-family: var(--outfit); font-size: 14px; font-weight: 500; }
+.legal-policy-section p { margin: 0 0 7px; color: #b7bac8; font-size: 10px; line-height: 1.75; }
+.legal-policy-section p:last-child { margin-bottom: 0; }
+.legal-policy-section a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
 
 @media (min-width: 1400px) {
   .hero { min-height: 740px; }
@@ -526,6 +539,7 @@ h1, h2, h3, p { margin-top: 0; }
   .contact-form { padding: 19px; }
   .footer-inner { grid-template-columns: 1fr; gap: 22px; }
   .footer-links { flex-wrap: wrap; gap: 15px 20px; }
+  .legal-dialog-heading { padding-right: 0; }
   .footer-meta { grid-column: auto; font-size: 8px; }
   .mobile-nav { position: fixed; z-index: 30; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: repeat(4, 1fr); min-height: 64px; padding: 5px 8px max(5px, env(safe-area-inset-bottom)); border-top: 1px solid rgba(211, 192, 215, .11); background: rgba(10, 14, 23, .92); backdrop-filter: blur(18px); }
   .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #969bab; font-size: 8px; }

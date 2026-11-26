@@ -1,6 +1,7 @@
 import Icon from './components/Icon.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
+import LegalPolicies from './components/LegalPolicies.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
 import StackAiRibbon from './components/StackAiRibbon.jsx'
@@ -172,6 +173,7 @@ function App() {
             >
               WhatsApp · {WHATSAPP_DISPLAY_NUMBER}
             </a>
+            <LegalPolicies />
           </div>
           <div className="footer-meta"><span>© {new Date().getFullYear()} M. Teresa Rogani</span><a href="#inizio">Torna all’inizio ↑</a></div>
         </div>
