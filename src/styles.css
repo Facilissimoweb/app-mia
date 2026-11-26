@@ -568,8 +568,12 @@ h1, h2, h3, p { margin-top: 0; }
   .cookie-banner { bottom: calc(72px + env(safe-area-inset-bottom)); grid-template-columns: minmax(0, 1fr); gap: 11px; width: calc(100% - 20px); max-height: min(70dvh, 540px); padding: 14px; }
   .cookie-banner-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
   .cookie-banner-actions .cookie-button-primary { grid-column: 1 / -1; }
-  .cookie-button { min-height: 40px; padding: 8px 6px; font-size: 9px; }
+  .cookie-banner-heading strong { font-size: 16px; }
+  .cookie-banner-heading p { font-size: 11px; }
+  .cookie-button { min-height: 42px; padding: 8px 6px; font-size: 10px; }
   .cookie-category { grid-template-columns: 17px minmax(0, 1fr); gap: 8px; }
+  .cookie-category strong { font-size: 11px; }
+  .cookie-category small { font-size: 10px; }
   .cookie-category-status { grid-column: 2; }
   .cookie-storage-notice { align-items: flex-start; flex-direction: column; }
   .footer-meta { grid-column: auto; font-size: 8px; }
