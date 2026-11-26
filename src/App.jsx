@@ -4,7 +4,6 @@ import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
-import AmbientMesh3D from './components/AmbientMesh3D.jsx'
 import brandLogo from './assets/mtrdesignlogo.png'
 
 const EMAIL = 'studio@teresarogani.design'
@@ -37,7 +36,6 @@ function App() {
 
       <main>
         <section className="hero page-width" id="inizio">
-          <img className="hero-logo-bg" src={brandLogo} alt="" aria-hidden="true" />
           <div className="hero-copy">
             <div className="status-pill"><span /> Design indipendente · Consulenza digitale</div>
             <p className="hero-kicker">Strategia, identità, presenza digitale.</p>
@@ -58,23 +56,8 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-art" aria-label="Composizione grafica astratta nei colori dello studio">
-            <AmbientMesh3D />
-            <div className="art-orbit orbit-one" />
-            <div className="art-orbit orbit-two" />
-            <div className="art-glow" />
-            <div className="art-card art-card-back">
-              <span className="art-micro">IDENTITÀ VISIVA · 2025</span>
-              <div className="art-back-shape" />
-            </div>
-            <div className="art-card art-card-front">
-              <span className="art-micro">STUDIO / 01</span>
-              <div className="art-monogram">T<span>.</span></div>
-              <div className="art-rule" />
-              <span className="art-caption">Forma, funzione<br />e intenzione.</span>
-            </div>
-            <div className="art-label"><span className="label-spark">✳</span> Progettato intorno a te</div>
-            <div className="art-index">MTR — 2026</div>
+          <div className="hero-art">
+            <img className="hero-logo" src={brandLogo} alt="Logo mtrdesign.me" />
           </div>
 
           <div className="hero-stats">
