@@ -46,7 +46,7 @@ const plans = [
   {
     name: 'SaaS Essential',
     price: '75',
-    period: 'al mese · fatturazione annuale',
+    period: 'al mese · primi 6 mesi, poi mensile',
     note: 'Una presenza web essenziale, veloce e sempre aggiornata.',
     features: [
       'Sito web leggero e responsive',
@@ -60,7 +60,7 @@ const plans = [
   {
     name: 'SaaS Pro Sartoriale',
     price: '140',
-    period: 'al mese · fatturazione annuale',
+    period: 'al mese · primi 6 mesi, poi mensile',
     note: 'Un’esperienza su misura e un supporto prioritario per il tuo business.',
     features: [
       'Sito multi-sezione personalizzato',
@@ -86,7 +86,7 @@ const pricingFaqs = [
   {
     question: 'Posso partire in abbonamento e riscattare il codice in seguito?',
     answer:
-      "Sì. I piani SaaS Essential e SaaS Pro Sartoriale servono a darti serenità operativa con hosting, aggiornamenti, cura tecnica e supporto diretto. Se in futuro vorrai gestire tutto in autonomia, potrai riscattare il codice sorgente con un contributo una tantum trasparente, concordato fin dall'inizio.",
+      "Sì. Il percorso prevede i primi 6 mesi per coprire l'avvio e la gestione iniziale, per poi proseguire su base mensile. Se in futuro vorrai riscattare il codice sorgente e gestirlo in autonomia, potrai farlo concordando una quota trasparente legata all'ammortamento del progetto e al passaggio di consegne.",
   },
   {
     question: 'Posso acquistare direttamente il solo codice sorgente senza abbonamento?',
