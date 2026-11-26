@@ -5,6 +5,7 @@ import ExamplesSection from './components/ExamplesSection.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
 import AmbientMesh3D from './components/AmbientMesh3D.jsx'
+import brandLogo from './assets/mtrdesignlogo.png'
 
 const EMAIL = 'studio@teresarogani.design'
 
@@ -16,7 +17,7 @@ function App() {
       <header className="site-header">
         <div className="header-inner">
           <a className="brand" href="#inizio" aria-label="M. Teresa Rogani, torna all'inizio">
-            <span className="brand-mark">T<span>.</span></span>
+            <img className="brand-logo" src={brandLogo} alt="" aria-hidden="true" />
             <span className="brand-copy">
               <strong>M. Teresa Rogani</strong>
               <small>Studio di design</small>
@@ -36,6 +37,7 @@ function App() {
 
       <main>
         <section className="hero page-width" id="inizio">
+          <img className="hero-logo-bg" src={brandLogo} alt="" aria-hidden="true" />
           <div className="hero-copy">
             <div className="status-pill"><span /> Design indipendente · Consulenza digitale</div>
             <p className="hero-kicker">Strategia, identità, presenza digitale.</p>
@@ -147,7 +149,7 @@ function App() {
       <footer className="site-footer">
         <div className="footer-inner page-width">
           <a className="brand footer-brand" href="#inizio">
-            <span className="brand-mark">T<span>.</span></span>
+            <img className="brand-logo" src={brandLogo} alt="" aria-hidden="true" />
             <span className="brand-copy"><strong>M. Teresa Rogani</strong><small>Studio di design indipendente</small></span>
           </a>
           <div className="footer-links">
