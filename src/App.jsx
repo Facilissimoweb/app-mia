@@ -2,6 +2,7 @@ import Icon from './components/Icon.jsx'
 import CookieConsentManager, { useCookieConsent } from './components/CookieConsentManager.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
+import GuideChat from './components/GuideChat.jsx'
 import LegalPolicies from './components/LegalPolicies.jsx'
 import MethodSection from './components/MethodSection.jsx'
 import PricingSection from './components/PricingSection.jsx'
@@ -205,6 +206,8 @@ function LandingPage() {
           <Icon>chat</Icon><span>WhatsApp</span>
         </a>
       </nav>
+
+      <GuideChat />
     </>
   )
 }
