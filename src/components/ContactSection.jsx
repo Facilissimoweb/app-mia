@@ -1,26 +1,49 @@
 import { useState } from 'react'
 import Icon from './Icon.jsx'
-import { WHATSAPP_DISPLAY_NUMBER, getWhatsAppHref } from '../data/contact.js'
-import { plans } from '../data/pricing.js'
+import {
+  WHATSAPP_DISPLAY_NUMBER,
+  contactQuestions,
+  getQuestionnaireWhatsAppHref,
+  getWhatsAppHref,
+  buildEmptyQuestionnaireMessage,
+} from '../data/contact.js'
+
+const emptyAnswers = {
+  goal: '',
+  blocker: '',
+  blockerNote: '',
+  channel: '',
+  formula: '',
+}
+
+function hasQuestionnaireInput(answers) {
+  return contactQuestions.some((question) => {
+    const selected = String(answers[question.id] || '').trim()
+    const freeText = question.allowFreeText
+      ? String(answers.blockerNote || '').trim()
+      : ''
+    return Boolean(selected || freeText)
+  })
+}
 
 export default function ContactSection() {
-  const [service, setService] = useState('Consulenza strategica')
-  const [notice, setNotice] = useState('')
+  const [answers, setAnswers] = useState(emptyAnswers)
+  const filled = hasQuestionnaireInput(answers)
+  const whatsappHref = getQuestionnaireWhatsAppHref(answers)
+  const ctaLabel = filled ? 'Invia su WhatsApp' : 'Parliamone su WhatsApp'
 
-  function submitRequest(event) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const name = String(formData.get('name') || '').trim()
-    const message = String(formData.get('message') || '').trim()
-    const body = [
-      'Ciao Teresa, vorrei parlare di un progetto.',
-      `Nome: ${name}`,
-      `Servizio di interesse: ${service}`,
-      message ? `Messaggio: ${message}` : '',
-    ].filter(Boolean).join('\n\n')
+  function selectOption(questionId, option) {
+    setAnswers((current) => ({
+      ...current,
+      [questionId]: current[questionId] === option ? '' : option,
+    }))
+  }
 
-    window.open(getWhatsAppHref(body), '_blank', 'noopener,noreferrer')
-    setNotice('WhatsApp si apre con il messaggio già pronto: potrai rivederlo e inviarlo direttamente da lì.')
+  function updateBlockerNote(event) {
+    setAnswers((current) => ({
+      ...current,
+      blockerNote: event.target.value,
+    }))
   }
 
   return (
@@ -28,32 +51,75 @@ export default function ContactSection() {
       <div className="contact-intro">
         <span className="eyebrow"><span className="eyebrow-line" />Il prossimo passo</span>
         <h2>Ogni buon progetto<br />inizia con <span>una conversazione.</span></h2>
-        <p>Al momento il contatto avviene solo via WhatsApp: una risposta diretta, pratica e veloce, anche da smartphone.</p>
+        <p>
+          Quattro risposte rapide e ti preparo una traccia già pronta su WhatsApp:
+          niente form lunghi, solo ciò che serve per partire bene.
+        </p>
         <a
           aria-label={`Contattami su WhatsApp al ${WHATSAPP_DISPLAY_NUMBER}`}
           className="contact-whatsapp"
-          href={getWhatsAppHref('Ciao Teresa, vorrei parlare del mio progetto.')}
+          href={getWhatsAppHref(buildEmptyQuestionnaireMessage())}
           rel="noopener noreferrer"
           target="_blank"
         >
           <Icon>chat</Icon>{WHATSAPP_DISPLAY_NUMBER}
         </a>
       </div>
-      <form className="contact-form" onSubmit={submitRequest}>
-        <label htmlFor="contact-name">Come ti chiami?</label>
-        <input id="contact-name" name="name" autoComplete="name" placeholder="Il tuo nome" required />
-        <label htmlFor="contact-service">Di cosa hai bisogno?</label>
-        <select id="contact-service" name="service" value={service} onChange={(event) => setService(event.target.value)}>
-          {plans.map((plan) => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
-          <option value="Acquisto codice sorgente (una tantum)">Acquisto codice sorgente (una tantum)</option>
-          <option value="Altro progetto">Altro progetto</option>
-        </select>
-        <label htmlFor="contact-message">Aggiungi un messaggio (facoltativo)</label>
-        <textarea id="contact-message" name="message" rows="4" placeholder="La tua attività, i tuoi obiettivi o le idee che hai in mente..." />
-        <button className="button button-cyan submit-button" type="submit">Continua su WhatsApp <Icon>arrow_forward</Icon></button>
-        {notice && <p className="form-notice" role="status">{notice} Se preferisci, scrivimi al {WHATSAPP_DISPLAY_NUMBER}.</p>}
-        <p className="privacy-note">Il sito non conserva i dati: il messaggio viene passato a WhatsApp perché tu possa rivederlo prima di inviarlo.</p>
-      </form>
+
+      <div className="contact-form contact-questionnaire" role="form" aria-label="Mini-questionario strategico">
+        {contactQuestions.map((question, index) => (
+          <fieldset className="contact-question" key={question.id}>
+            <legend>
+              <span className="contact-question-index">{index + 1}</span>
+              {question.prompt}
+            </legend>
+            <div className="contact-chip-group" role="group" aria-label={question.prompt}>
+              {question.options.map((option) => {
+                const selected = answers[question.id] === option
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    className={`contact-chip${selected ? ' is-selected' : ''}`}
+                    aria-pressed={selected}
+                    onClick={() => selectOption(question.id, option)}
+                  >
+                    {option}
+                  </button>
+                )
+              })}
+            </div>
+            {question.allowFreeText && (
+              <label className="contact-free-text" htmlFor="contact-blocker-note">
+                <span>{question.freeTextLabel}</span>
+                <textarea
+                  id="contact-blocker-note"
+                  name="blockerNote"
+                  rows="2"
+                  value={answers.blockerNote}
+                  onChange={updateBlockerNote}
+                  placeholder={question.freeTextPlaceholder}
+                />
+              </label>
+            )}
+          </fieldset>
+        ))}
+
+        <a
+          className="button button-cyan submit-button"
+          href={whatsappHref}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {ctaLabel} <Icon>arrow_forward</Icon>
+        </a>
+
+        <p className="privacy-note">
+          Il sito non conserva le risposte: le scelte restano nel browser e diventano
+          il testo precompilato di WhatsApp, che puoi rivedere prima di inviare.
+          Preferisci scrivere subito? Usa {WHATSAPP_DISPLAY_NUMBER}.
+        </p>
+      </div>
     </section>
   )
 }
