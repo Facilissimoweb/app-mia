@@ -20,14 +20,14 @@ export const contactQuestions = [
     id: 'blocker',
     prompt: 'Qual è oggi l’intoppo principale?',
     options: [
-      'Troppe telefonate in fascia di punta',
+      'Perdo richieste fuori orario',
       'Commissioni portali esterni',
       'Sito poco chiaro da smartphone',
       'Parto da zero',
     ],
     allowFreeText: true,
     freeTextLabel: 'Aggiungi un dettaglio sull’intoppo (facoltativo)',
-    freeTextPlaceholder: 'Es. gestione prenotazioni confusa, menu poco leggibile…',
+    freeTextPlaceholder: 'Es. richieste sparse, menu poco leggibile…',
   },
   {
     id: 'channel',
