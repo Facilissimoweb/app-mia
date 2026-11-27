@@ -9,6 +9,16 @@
     />
     <meta name="theme-color" content="#0f131c" />
     <title>M. Teresa Rogani — Design &amp; Consulenza Digitale</title>
+    <script>
+      (function () {
+        try {
+          var scale = localStorage.getItem('mtrdesign-type-scale')
+          if (scale === 'sm' || scale === 'md' || scale === 'lg') {
+            document.documentElement.dataset.typeScale = scale
+          }
+        } catch (error) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

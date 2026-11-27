@@ -2,6 +2,7 @@ import Icon from './components/Icon.jsx'
 import CookieConsentManager, { useCookieConsent } from './components/CookieConsentManager.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import ExamplesSection from './components/ExamplesSection.jsx'
+import FontScaleControl from './components/FontScaleControl.jsx'
 import GuideChat from './components/GuideChat.jsx'
 import LegalPolicies from './components/LegalPolicies.jsx'
 import MethodSection from './components/MethodSection.jsx'
@@ -42,14 +43,17 @@ function LandingPage() {
             <a href="#profilo">Profilo</a>
             <a href="#tariffe">Servizi</a>
           </nav>
-          <a
-            className="button button-small button-cyan header-cta"
-            href={getWhatsAppHref(GENERAL_WHATSAPP_MESSAGE)}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Parliamone <Icon>north_east</Icon>
-          </a>
+          <div className="header-tools">
+            <FontScaleControl />
+            <a
+              className="button button-small button-cyan header-cta"
+              href={getWhatsAppHref(GENERAL_WHATSAPP_MESSAGE)}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Parliamone <Icon>north_east</Icon>
+            </a>
+          </div>
         </div>
       </header>
 
