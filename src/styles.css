@@ -480,6 +480,8 @@ h1, h2, h3, p { margin-top: 0; }
 .guide-chat-primary, .guide-chat-secondary { width: 100%; min-height: 44px; }
 .guide-chat-chips { display: flex; flex-wrap: wrap; gap: 7px; }
 .guide-chat-chip { width: 100%; min-height: 44px; }
+.guide-chat-chip-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; box-sizing: border-box; }
+.guide-chat-topic-nav { display: grid; gap: 7px; }
 .guide-chat-note { display: grid; gap: 8px; }
 .guide-chat-note label { display: grid; gap: 6px; color: #e1e3ed; font-size: 10px; font-weight: 500; }
 .guide-chat-note textarea { width: 100%; min-height: 68px; padding: 10px 12px; border: 1px solid rgba(211, 192, 215, .12); border-radius: 6px; outline: none; color: var(--ink); background: #11151f; font-size: 12px; resize: vertical; }

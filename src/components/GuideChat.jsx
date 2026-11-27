@@ -4,6 +4,8 @@ import {
   chatGuideCopy,
   chatGuideSteps,
   getGuideChatWhatsAppHref,
+  getGuideTopic,
+  guideMenuTopics,
 } from '../data/chatGuide.js'
 
 const emptyAnswers = {
@@ -32,13 +34,19 @@ export default function GuideChat() {
 
   const [open, setOpen] = useState(false)
   const [stepIndex, setStepIndex] = useState(0)
-  const [phase, setPhase] = useState('welcome') // welcome | question | note | done
+  // menu | topic | question | note | done
+  const [phase, setPhase] = useState('menu')
+  const [activeTopicId, setActiveTopicId] = useState(null)
   const [answers, setAnswers] = useState(emptyAnswers)
   const [noteDraft, setNoteDraft] = useState('')
-  const [messages, setMessages] = useState(() => [createBotMessage(chatGuideCopy.welcome)])
+  const [messages, setMessages] = useState(() => [
+    createBotMessage(chatGuideCopy.welcome),
+    createBotMessage(chatGuideCopy.menuPrompt),
+  ])
 
   const totalSteps = chatGuideSteps.length
   const currentStep = chatGuideSteps[stepIndex]
+  const activeTopic = activeTopicId ? getGuideTopic(activeTopicId) : null
   const whatsappHref = getGuideChatWhatsAppHref(answers)
 
   useEffect(() => {
@@ -62,7 +70,7 @@ export default function GuideChat() {
   useEffect(() => {
     if (!logRef.current) return
     logRef.current.scrollTop = logRef.current.scrollHeight
-  }, [messages, phase, open])
+  }, [messages, phase, open, activeTopicId])
 
   useEffect(() => {
     if (phase === 'note') {
@@ -74,21 +82,63 @@ export default function GuideChat() {
     setMessages((current) => [...current, ...next])
   }
 
-  function startQuestions() {
+  function showMenu(promptAgain = true) {
+    setPhase('menu')
+    setActiveTopicId(null)
+    if (promptAgain) {
+      appendMessages(createBotMessage(chatGuideCopy.menuPrompt))
+    }
+  }
+
+  function openTopic(topicId) {
+    const topic = getGuideTopic(topicId)
+    if (!topic) return
+
+    setActiveTopicId(topic.id)
+    setPhase('topic')
+    appendMessages(createUserMessage(topic.label), createBotMessage(topic.reply))
+  }
+
+  function startQuiz() {
+    setActiveTopicId(null)
     setPhase('question')
     setStepIndex(0)
-    appendMessages(createBotMessage(chatGuideSteps[0].prompt))
+    appendMessages(
+      createBotMessage(chatGuideCopy.quizIntro),
+      createBotMessage(chatGuideSteps[0].prompt),
+    )
+  }
+
+  function handleFollowUp(followUp) {
+    if (followUp.action === 'quiz') {
+      appendMessages(createUserMessage(followUp.label))
+      startQuiz()
+      return
+    }
+
+    if (followUp.action === 'whatsapp') {
+      appendMessages(createUserMessage(followUp.label))
+      return
+    }
+
+    if (followUp.topicId) {
+      openTopic(followUp.topicId)
+    }
   }
 
   function restart() {
     setAnswers(emptyAnswers)
     setNoteDraft('')
     setStepIndex(0)
-    setPhase('welcome')
-    setMessages([createBotMessage(chatGuideCopy.welcome)])
+    setActiveTopicId(null)
+    setPhase('menu')
+    setMessages([
+      createBotMessage(chatGuideCopy.welcome),
+      createBotMessage(chatGuideCopy.menuPrompt),
+    ])
   }
 
-  function advanceAfterAnswer(nextAnswers) {
+  function advanceAfterAnswer() {
     const nextIndex = stepIndex + 1
     if (nextIndex >= totalSteps) {
       setPhase('done')
@@ -116,7 +166,7 @@ export default function GuideChat() {
       return
     }
 
-    advanceAfterAnswer(nextAnswers)
+    advanceAfterAnswer()
   }
 
   function submitNote(skip) {
@@ -134,7 +184,7 @@ export default function GuideChat() {
       appendMessages(createUserMessage('Nessun dettaglio aggiuntivo'))
     }
 
-    advanceAfterAnswer(nextAnswers)
+    advanceAfterAnswer()
   }
 
   function toggleOpen() {
@@ -150,6 +200,13 @@ export default function GuideChat() {
   function goToContact() {
     setOpen(false)
   }
+
+  function goToSection() {
+    setOpen(false)
+  }
+
+  const topicFollowUps = activeTopic?.followUps || []
+  const showWhatsAppInTopic = topicFollowUps.some((item) => item.action === 'whatsapp')
 
   return (
     <div className={`guide-chat${open ? ' is-open' : ''}`}>
@@ -209,11 +266,20 @@ export default function GuideChat() {
           </div>
 
           <div className="guide-chat-actions">
-            {phase === 'welcome' && (
+            {phase === 'menu' && (
               <>
-                <button type="button" className="button button-cyan guide-chat-primary" onClick={startQuestions}>
-                  Inizia <Icon>arrow_forward</Icon>
-                </button>
+                <div className="guide-chat-chips" role="group" aria-label={chatGuideCopy.menuPrompt}>
+                  {guideMenuTopics.map((topic) => (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      className="contact-chip guide-chat-chip"
+                      onClick={() => openTopic(topic.id)}
+                    >
+                      {topic.label}
+                    </button>
+                  ))}
+                </div>
                 <a
                   className="button button-outline guide-chat-secondary"
                   href={whatsappHref}
@@ -222,6 +288,74 @@ export default function GuideChat() {
                 >
                   WhatsApp subito
                 </a>
+              </>
+            )}
+
+            {phase === 'topic' && activeTopic && (
+              <>
+                {topicFollowUps.length > 0 && (
+                  <div
+                    className="guide-chat-chips"
+                    role="group"
+                    aria-label={`Approfondimenti su ${activeTopic.label}`}
+                  >
+                    {topicFollowUps.map((followUp) => {
+                      if (followUp.action === 'whatsapp') {
+                        return (
+                          <a
+                            key={followUp.label}
+                            className="contact-chip guide-chat-chip guide-chat-chip-link"
+                            href={whatsappHref}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            onClick={() => appendMessages(createUserMessage(followUp.label))}
+                          >
+                            {followUp.label}
+                          </a>
+                        )
+                      }
+
+                      return (
+                        <button
+                          key={followUp.label}
+                          type="button"
+                          className="contact-chip guide-chat-chip"
+                          onClick={() => handleFollowUp(followUp)}
+                        >
+                          {followUp.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+                <div className="guide-chat-topic-nav">
+                  {activeTopic.sectionHref && (
+                    <a
+                      className="button button-outline guide-chat-secondary"
+                      href={activeTopic.sectionHref}
+                      onClick={goToSection}
+                    >
+                      {activeTopic.sectionLabel || 'Vai alla sezione'}
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    className="button button-cyan guide-chat-primary"
+                    onClick={() => showMenu(true)}
+                  >
+                    {chatGuideCopy.backToMenu}
+                  </button>
+                  {!showWhatsAppInTopic && (
+                    <a
+                      className="button button-outline guide-chat-secondary"
+                      href={whatsappHref}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {chatGuideCopy.whatsappCta}
+                    </a>
+                  )}
+                </div>
               </>
             )}
 
