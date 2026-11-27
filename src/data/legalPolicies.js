@@ -16,7 +16,7 @@ export const privacyPolicy = {
     {
       title: 'Dati trattati e finalità',
       paragraphs: [
-        'Se compili il modulo di contatto, il nome, il servizio selezionato e l’eventuale messaggio vengono usati per preparare una richiesta e rispondere a domande o preventivi. Il modulo non invia dati a un server del sito.',
+        'Se usi il mini-questionario di contatto, le risposte selezionate e l’eventuale dettaglio sull’intoppo principale vengono usati solo per preparare una richiesta su WhatsApp e rispondere a domande o preventivi. Il questionario non invia dati a un server del sito.',
         'La scelta sui cookie e sulle risorse esterne viene salvata nel Local Storage del browser per ricordare le preferenze, senza creare profili. I dati tecnici di navigazione, come indirizzo IP, informazioni sul browser e log di sicurezza, possono essere trattati dal provider che ospita e distribuisce il sito per consentirne il funzionamento e proteggerlo. Provider: [INDICARE HOSTING/CDN].',
         'I concept, gli esempi e i contenuti del portfolio sono pubblicati per presentare i servizi di progettazione e sviluppo. Eventuali dati personali presenti in progetti reali devono essere pubblicati con una base giuridica appropriata.',
       ],
@@ -37,14 +37,14 @@ export const privacyPolicy = {
     {
       title: 'Modalità e destinatari',
       paragraphs: [
-        'Il sito non conserva le informazioni inserite nel modulo: nome, servizio ed eventuale messaggio restano nel browser fino all’apertura di WhatsApp e sono inseriti nel collegamento precompilato. Il provider di hosting e i fornitori delle risorse esterne possono ricevere i dati tecnici necessari a fornire i rispettivi servizi.',
+        'Il sito non conserva le informazioni del questionario: le scelte e l’eventuale testo libero restano nel browser fino all’apertura di WhatsApp e sono inseriti nel collegamento precompilato. Il provider di hosting e i fornitori delle risorse esterne possono ricevere i dati tecnici necessari a fornire i rispettivi servizi.',
         'Font da Google Fonts e immagini da Unsplash vengono richiesti solo se autorizzi la categoria “Risorse / media esterni”. In quel caso i rispettivi fornitori possono ricevere dati tecnici come l’indirizzo IP e le informazioni del browser. I servizi esterni applicano le proprie informative e potrebbero trattare dati anche fuori dallo Spazio Economico Europeo secondo le garanzie previste dalle loro condizioni.',
       ],
     },
     {
       title: 'Conservazione',
       paragraphs: [
-        'Il sito non conserva i dati del modulo. Le comunicazioni ricevute su WhatsApp vengono conservate per il tempo necessario a gestire la richiesta e, se nasce un rapporto professionale, per la sua gestione e per gli obblighi di legge. Criterio o periodo per le richieste che non diventano incarichi: [SPECIFICARE IL PERIODO DI CONSERVAZIONE].',
+        'Il sito non conserva i dati del questionario. Le comunicazioni ricevute su WhatsApp vengono conservate per il tempo necessario a gestire la richiesta e, se nasce un rapporto professionale, per la sua gestione e per gli obblighi di legge. Criterio o periodo per le richieste che non diventano incarichi: [SPECIFICARE IL PERIODO DI CONSERVAZIONE].',
         'La preferenza cookie resta nel Local Storage finché non viene modificata o cancellata dal browser. I log tecnici sono conservati dal provider di hosting secondo i suoi termini e per il periodo applicabile: [INDICARE PROVIDER E TEMPI DI CONSERVAZIONE].',
       ],
     },
